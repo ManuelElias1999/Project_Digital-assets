@@ -1,28 +1,36 @@
-REMIX DEFAULT WORKSPACE
+# ERC721 NFT Contract
 
-Remix default workspace is present when:
-i. Remix loads for the very first time 
-ii. A new workspace is created with 'Default' template
-iii. There are no files existing in the File Explorer
+This Solidity smart contract implements an ERC721 Non-Fungible Token (NFT) using the OpenZeppelin library.
 
-This workspace contains 3 directories:
+## Description
 
-1. 'contracts': Holds three contracts with increasing levels of complexity.
-2. 'scripts': Contains four typescript files to deploy a contract. It is explained below.
-3. 'tests': Contains one Solidity test file for 'Ballot' contract & one JS test file for 'Storage' contract.
+The `MyNFT` contract allows users to mint ERC721 NFTs by providing a token URI. It supports the standard ERC721 functions for managing ownership and metadata of NFTs.
 
-SCRIPTS
+## Contract Details
 
-The 'scripts' folder has four typescript files which help to deploy the 'Storage' contract using 'web3.js' and 'ethers.js' libraries.
+- **Name**: MyNFT
+- **Symbol**: NFT
+- **Token Metadata**: Stored on-chain using ERC721URIStorage extension.
 
-For the deployment of any other contract, just update the contract's name from 'Storage' to the desired contract and provide constructor arguments accordingly 
-in the file `deploy_with_ethers.ts` or  `deploy_with_web3.ts`
+## Core Features
 
-In the 'tests' folder there is a script containing Mocha-Chai unit tests for 'Storage' contract.
+- **Minting**: Users can mint new NFTs by providing a token URI and paying the specified price in Ether.
+- **Ownership**: Tracks ownership of NFTs using the ERC721 standard.
+- **Token URI**: Sets the token URI for each minted NFT, allowing off-chain metadata to be associated with the token.
 
-To run a script, right click on file name in the file explorer and click 'Run'. Remember, Solidity file must already be compiled.
-Output from script will appear in remix terminal.
+## Usage
 
-Please note, require/import is supported in a limited manner for Remix supported modules.
-For now, modules supported by Remix are ethers, web3, swarmgw, chai, multihashes, remix and hardhat only for hardhat.ethers object/plugin.
-For unsupported modules, an error like this will be thrown: '<module_name> module require is not supported by Remix IDE' will be shown.
+1. **Deployment**: Deploy the contract on the Ethereum network, specifying the price for minting NFTs.
+2. **Minting**: Users can mint new NFTs by calling the `mintNFT` function, providing a token URI and paying the specified price in Ether.
+
+### Example Usage
+
+```solidity
+// Deploy the contract with a minting price of 0.1 Ether
+MyNFT myNFT = new MyNFT(0.1 ether);
+
+// Mint a new NFT
+uint256 tokenId = myNFT.mintNFT("https://example.com/token1");
+
+// Get token metadata
+string memory tokenURI = myNFT.tokenURI(tokenId);
